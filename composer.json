@@ -1,0 +1,17 @@
+{
+    "name": "dbrisinajumi/d1status",
+    "description": "Status module",
+    "keywords": ["status","yii","phundament"],
+    "type": "yii-extension",
+    "license": "BSD-2-Clause",
+    "authors": [
+        {
+            "name": "Uldis Nelsons",
+            "email": "uldisnelsons@gmail.com"
+        },
+        {
+            "name": "Juris Malinens",
+            "email": "juris.malinens@inbox.lv"
+        }
+    ]
+}
