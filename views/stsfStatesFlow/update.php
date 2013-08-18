@@ -1,13 +1,17 @@
 <?php
-$this->breadcrumbs[Yii::t('crud','Stsf States Flows')] = array('admin');
+$this->breadcrumbs['Stsf States Flows'] = array('index');
 $this->breadcrumbs[$model->{$model->tableSchema->primaryKey}] = array('view','id'=>$model->{$model->tableSchema->primaryKey});
-$this->breadcrumbs[] = Yii::t('crud', 'Update');
-?>
-<?php $this->widget("TbBreadcrumbs", array("links"=>$this->breadcrumbs)) ?>
-<h1>
-    <?php echo Yii::t('crud','Stsf States Flow')?> <small><?php echo Yii::t('crud','Update')?> #<?php echo $model->stsf_id ?></small></h1>
+$this->breadcrumbs[] = Yii::t('app', 'Update');
 
-<?php $this->renderPartial("_toolbar", array("model"=>$model)); ?>
+if(!isset($this->menu) || $this->menu === array())
+$this->menu=array(
+array('label'=>Yii::t('app', 'Delete') , 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->stsf_id),'confirm'=>'Are you sure you want to delete this item?')),
+array('label'=>Yii::t('app', 'Create') , 'url'=>array('create')),
+array('label'=>Yii::t('app', 'Manage') , 'url'=>array('admin')),
+);
+?>
+
+<h1> <?php echo Yii::t('app', 'Update');?> <?php echo Yii::t('app', 'StsfStatesFlow');?> #<?php echo $model->stsf_id; ?> </h1>
 <?php
 $this->renderPartial('_form', array(
 'model'=>$model));

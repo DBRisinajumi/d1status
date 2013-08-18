@@ -24,9 +24,12 @@ class StlgLog extends BaseStlgLog
 
 	public function behaviors()
 	{
-		return array_merge(
-			parent::behaviors(),
-			array(
+            return array_merge(
+                parent::behaviors(),
+                array(
+                    'LoggableBehavior'=>array(
+                        'class' => 'vendor.sammaye.auditrail2.behaviors.LoggableBehavior'
+                    )
             ));
 	}
 

@@ -1,12 +1,15 @@
 <?php
-$this->breadcrumbs[Yii::t('crud','Stst States')] = array('admin');
-$this->breadcrumbs[] = Yii::t('crud', 'Create');
-?>
-<?php $this->widget("TbBreadcrumbs", array("links"=>$this->breadcrumbs)) ?>
-<h1>
-    <?php echo Yii::t('crud','Stst State')?> <small><?php echo Yii::t('crud','Create')?></h1>
+$this->breadcrumbs['Stst States'] = array('admin');
+$this->breadcrumbs[] = Yii::t('app', 'Create');
 
-<?php $this->renderPartial("_toolbar", array("model"=>$model)); ?>
+if(!isset($this->menu) || $this->menu === array())
+$this->menu=array(
+/*array('label'=>Yii::t('app', 'List'), 'url'=>array('index')),
+array('label'=>Yii::t('app', 'Manage'), 'url'=>array('admin')),*/
+);
+?>
+
+<h2> Create StstState </h2>
 <?php
 $this->renderPartial('_form', array(
 'model' => $model,

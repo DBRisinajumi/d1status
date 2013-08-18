@@ -53,18 +53,18 @@ abstract class BaseStstState extends CActiveRecord{
 	{
 		return array(
 			'stlgLogs' => array(self::HAS_MANY, 'StlgLog', 'stlg_stst_id'),
-			'stsfStatesFlows' => array(self::HAS_MANY, 'StsfStatesFlow', 'stfs_prev_stst_id'),
-			'stsfStatesFlows1' => array(self::HAS_MANY, 'StsfStatesFlow', 'stfs_next_stst_id'),
+			'stsfStatesFlows' => array(self::HAS_MANY, 'StsfStatesFlow', 'stsf_prev_stst_id'),
+			'stsfStatesFlows1' => array(self::HAS_MANY, 'StsfStatesFlow', 'stsf_next_stst_id'),
 		);
 	}
 
 	public function attributeLabels()
 	{
 		return array(
-			'stst_id' => Yii::t('crud', 'Stst'),
-			'stst_name' => Yii::t('crud', 'Stst Name'),
-			'stst_code' => Yii::t('crud', 'Stst Code'),
-			'stst_icon' => Yii::t('crud', 'Stst Icon'),
+			'stst_id' => Yii::t('D1Status.crud', 'Stst'),
+			'stst_name' => Yii::t('D1Status.crud', 'Stst Name'),
+			'stst_code' => Yii::t('D1Status.crud', 'Stst Code'),
+			'stst_icon' => Yii::t('D1Status.crud', 'Stst Icon'),
 		);
 	}
 

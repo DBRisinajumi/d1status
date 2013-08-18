@@ -12,9 +12,9 @@
  * @property string $stlg_datetime
  *
  * Relations of table "stlg_log" available as properties of the model:
- * @property SUsers $stlgUser
  * @property StflFlow $stlgStfl
  * @property StstState $stlgStst
+ * @property SUsers $stlgUser
  */
 abstract class BaseStlgLog extends CActiveRecord{
 	public static function model($className=__CLASS__)
@@ -53,21 +53,21 @@ abstract class BaseStlgLog extends CActiveRecord{
 	public function relations()
 	{
 		return array(
-			'stlgUser' => array(self::BELONGS_TO, 'SUsers', 'stlg_user_id'),
 			'stlgStfl' => array(self::BELONGS_TO, 'StflFlow', 'stlg_stfl_id'),
 			'stlgStst' => array(self::BELONGS_TO, 'StstState', 'stlg_stst_id'),
+			'stlgUser' => array(self::BELONGS_TO, 'SUsers', 'stlg_user_id'),
 		);
 	}
 
 	public function attributeLabels()
 	{
 		return array(
-			'stlg_id' => Yii::t('crud', 'Stlg'),
-			'stlg_stfl_id' => Yii::t('crud', 'Stlg Stfl'),
-			'stlg_record_id' => Yii::t('crud', 'Stlg Record'),
-			'stlg_user_id' => Yii::t('crud', 'Stlg User'),
-			'stlg_stst_id' => Yii::t('crud', 'Stlg Stst'),
-			'stlg_datetime' => Yii::t('crud', 'Stlg Datetime'),
+			'stlg_id' => Yii::t('D1Status.crud', 'Stlg'),
+			'stlg_stfl_id' => Yii::t('D1Status.crud', 'Stlg Stfl'),
+			'stlg_record_id' => Yii::t('D1Status.crud', 'Stlg Record'),
+			'stlg_user_id' => Yii::t('D1Status.crud', 'Stlg User'),
+			'stlg_stst_id' => Yii::t('D1Status.crud', 'Stlg Stst'),
+			'stlg_datetime' => Yii::t('D1Status.crud', 'Stlg Datetime'),
 		);
 	}
 

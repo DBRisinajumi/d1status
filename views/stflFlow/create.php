@@ -1,12 +1,15 @@
 <?php
-$this->breadcrumbs[Yii::t('crud','Stfl Flows')] = array('admin');
-$this->breadcrumbs[] = Yii::t('crud', 'Create');
-?>
-<?php $this->widget("TbBreadcrumbs", array("links"=>$this->breadcrumbs)) ?>
-<h1>
-    <?php echo Yii::t('crud','Stfl Flow')?> <small><?php echo Yii::t('crud','Create')?></h1>
+$this->breadcrumbs['Stfl Flows'] = array('admin');
+$this->breadcrumbs[] = Yii::t('app', 'Create');
 
-<?php $this->renderPartial("_toolbar", array("model"=>$model)); ?>
+if(!isset($this->menu) || $this->menu === array())
+$this->menu=array(
+/*array('label'=>Yii::t('app', 'List'), 'url'=>array('index')),
+array('label'=>Yii::t('app', 'Manage'), 'url'=>array('admin')),*/
+);
+?>
+
+<h2> Create StflFlow </h2>
 <?php
 $this->renderPartial('_form', array(
 'model' => $model,

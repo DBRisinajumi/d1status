@@ -1,14 +1,8 @@
-<div class="">
-    <p class="alert">
-        <?php echo Yii::t('crud','Fields with <span class="required">*</span> are required.');?> 
+<div class="form">
+    <p class="note">
+        <?php echo Yii::t('app','Fields with');?> <span class="required">*</span> <?php echo Yii::t('app','are required');?>.
     </p>
 
-
-    <?php
-    $this->widget('echosen.EChosen',
-        array('target'=>'select')
-    );
-    ?>
     <?php
     $form=$this->beginWidget('CActiveForm', array(
     'id'=>'stfa-flow-access-form',
@@ -17,49 +11,19 @@
     ));
 
     echo $form->errorSummary($model);
-
     ?>
- <div class="row">
-     <div class="span8"> <!-- main inputs -->
 
-    
-    <div class="row-fluid input-block-level-container">
-        <div class="span12">
-            <?php echo $form->labelEx($model,'stfa_notes'); ?>
+    <div class="row">
+<?php echo $form->labelEx($model,'stfa_notes'); ?>
 
-            <?php echo $form->textArea($model,'stfa_notes',array('rows'=>6, 'cols'=>50)); ?>
-            <?php echo $form->error($model,'stfa_notes'); ?>
-            <?php if('help.stfa_notes' != $help = Yii::t('crud', 'help.stfa_notes')) { 
-                echo "<span class='help-block'>{$help}</span>";            
-} ?>
-        </div>
-    </div>
+<?php echo $form->textArea($model,'stfa_notes',array('rows'=>6, 'cols'=>50)); ?>
+<?php echo $form->error($model,'stfa_notes'); ?>
+<div class='hint'><?php if('hint.StfaFlowAccess.stfa_notes' != $hint = Yii::t('app', 'stfa_notes')) echo $hint; ?></div>
+</div>
 
-    <div class="row-fluid input-block-level-container">
-        <div class="span12">
-        <label for="stfaAuthitem"><?php echo Yii::t('crud', 'StfaAuthitem'); ?></label>
-                <?php
-                $this->widget(
-					'Relation',
-					array(
-							'model' => $model,
-							'relation' => 'stfaAuthitem',
-							'fields' => 'type',
-							'allowEmpty' => false,
-							'style' => 'dropdownlist',
-							'htmlOptions' => array(
-								'checkAll' => 'all'),
-							)
-						)
-              ?>
-        </div>
-    </div>
-
-    <div class="row-fluid input-block-level-container">
-        <div class="span12">
-        <label for="stfaStsf"><?php echo Yii::t('crud', 'StfaStsf'); ?></label>
-                <?php
-                $this->widget(
+<div class="row">
+<label for="stfaStsf"><?php echo Yii::t('app', 'StfaStsf'); ?></label>
+<?php $this->widget(
 					'Relation',
 					array(
 							'model' => $model,
@@ -70,32 +34,29 @@
 							'htmlOptions' => array(
 								'checkAll' => 'all'),
 							)
-						)
-              ?>
-        </div>
-    </div>
+						); ?><br />
+</div>
 
-    </div> <!-- main inputs -->
-
-
-    <div class="span4"> <!-- sub inputs -->
-
-    </div> <!-- sub inputs -->
+<div class="row">
+<label for="stfaAuthitem"><?php echo Yii::t('app', 'StfaAuthitem'); ?></label>
+<?php $this->widget(
+					'Relation',
+					array(
+							'model' => $model,
+							'relation' => 'stfaAuthitem',
+							'fields' => 'type',
+							'allowEmpty' => false,
+							'style' => 'dropdownlist',
+							'htmlOptions' => array(
+								'checkAll' => 'all'),
+							)
+						); ?><br />
 </div>
 
 
-    <div class="form-actions">
-        
     <?php
-        echo CHtml::Button(Yii::t('crud', 'Cancel'), array(
-			'submit' => (isset($_GET['returnUrl']))?$_GET['returnUrl']:array('stfaflowaccess/admin'),
-			'class' => 'btn'
-			));
-        echo ' '.CHtml::submitButton(Yii::t('crud', 'Save'), array(
-            'class' => 'btn btn-primary'
-            ));
-    ?>
-</div>
-
-<?php $this->endWidget() ?>
+echo CHtml::Button(Yii::t('app', 'Cancel'), array(
+			'submit' => array('stfaflowaccess/admin')));
+echo CHtml::submitButton(Yii::t('app', 'Save'));
+$this->endWidget(); ?>
 </div> <!-- form -->

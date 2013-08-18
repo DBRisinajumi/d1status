@@ -64,11 +64,11 @@ abstract class BaseStsfStatesFlow extends CActiveRecord{
 	public function attributeLabels()
 	{
 		return array(
-			'stsf_id' => Yii::t('crud', 'Stsf'),
-			'stsf_stfl_id' => Yii::t('crud', 'Stsf Stfl'),
-			'stsf_prev_stst_id' => Yii::t('crud', 'Stsf Prev Stst'),
-			'stsf_next_stst_id' => Yii::t('crud', 'Stsf Next Stst'),
-			'stsf_notes' => Yii::t('crud', 'Stsf Notes'),
+			'stsf_id' => Yii::t('D1Status.crud', 'Stsf'),
+			'stsf_stfl_id' => Yii::t('D1Status.crud', 'Stsf Stfl'),
+			'stsf_prev_stst_id' => Yii::t('D1Status.crud', 'Stsf Prev Stst'),
+			'stsf_next_stst_id' => Yii::t('D1Status.crud', 'Stsf Next Stst'),
+			'stsf_notes' => Yii::t('D1Status.crud', 'Stsf Notes'),
 		);
 	}
 

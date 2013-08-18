@@ -2,171 +2,174 @@
 
 class StsfStatesFlowController extends Controller
 {
-    #public $layout='//layouts/column2';
-    public $defaultAction = "admin";
-    public $scenario = "crud";
+	public $layout='//layouts/column2';
 
-    public function filters() {
-	return array(
-			'accessControl',
-			);
-}
+	public function filters()
+	{
+		return array(
+			'accessControl', 
+		);
+	}	
 
-public function accessRules() {
-	return array(
-			array('allow',
-				'actions'=>array('create','editableSaver','update','delete','admin','view'),
-				'roles'=>array('D1Status.StsfStatesFlow.*'),
-				),
-			array('deny',
+	public function accessRules()
+	{
+		return array(
+			array('allow',  
+				'actions'=>array('index','view'),
 				'users'=>array('*'),
-				),
-			);
-}
+			),
+			array('allow', 
+				'actions'=>array('create','update'),
+				'users'=>array('@'),
+			),
+			array('allow', 
+				'actions'=>array('admin','delete'),
+				'users'=>array('admin'),
+			),
+			array('deny',  
+				'users'=>array('*'),
+			),
+		);
+	}
+	
+	public function beforeAction($action){
+		parent::beforeAction($action);
+		// map identifcationColumn to id
+		if (!isset($_GET['id']) && isset($_GET['stsf_id'])) {
+			$model=StsfStatesFlow::model()->find('stsf_id = :stsf_id', array(
+			':stsf_id' => $_GET['stsf_id']));
+			if ($model !== null) {
+				$_GET['id'] = $model->stsf_id;
+			} else {
+				throw new CHttpException(400);
+			}
+		}
+		if ($this->module !== null) {
+			$this->breadcrumbs[$this->module->Id] = array('/'.$this->module->Id);
+		}
+		return true;
+	}
+	
+	public function actionView($id)
+	{
+		$model = $this->loadModel($id);
+		$this->render('view',array(
+			'model' => $model,
+		));
+	}
 
-    public function beforeAction($action){
-        parent::beforeAction($action);
-        // map identifcationColumn to id
-        if (!isset($_GET['id']) && isset($_GET['stsf_id'])) {
-            $model=StsfStatesFlow::model()->find('stsf_id = :stsf_id', array(
-            ':stsf_id' => $_GET['stsf_id']));
-            if ($model !== null) {
-                $_GET['id'] = $model->stsf_id;
-            } else {
-                throw new CHttpException(400);
-            }
-        }
-        if ($this->module !== null) {
-            $this->breadcrumbs[$this->module->Id] = array('/'.$this->module->Id);
-        }
-        return true;
-    }
+	public function actionCreate()
+	{
+		$model = new StsfStatesFlow;
 
-    public function actionView($id)
-    {
-        $model = $this->loadModel($id);
-        $this->render('view',array('model' => $model,));
-    }
-
-    public function actionCreate()
-    {
-        $model = new StsfStatesFlow;
-        $model->scenario = $this->scenario;
-
-                $this->performAjaxValidation($model, 'stsf-states-flow-form');
+				$this->performAjaxValidation($model, 'stsf-states-flow-form');
     
-        if(isset($_POST['StsfStatesFlow'])) {
-            $model->attributes = $_POST['StsfStatesFlow'];
+		if(isset($_POST['StsfStatesFlow'])) {
+			$model->attributes = $_POST['StsfStatesFlow'];
 
-            try {
-                if($model->save()) {
-                    if (isset($_GET['returnUrl'])) {
-                        $this->redirect($_GET['returnUrl']);
-                    } else {
-                        $this->redirect(array('view','id'=>$model->stsf_id));
-                    }
-                }
-            } catch (Exception $e) {
-                $model->addError('stsf_id', $e->getMessage());
-            }
-        } elseif(isset($_GET['StsfStatesFlow'])) {
-            $model->attributes = $_GET['StsfStatesFlow'];
-        }
+			try {
+    			if($model->save()) {
+					if (isset($_GET['returnUrl'])) {
+						$this->redirect($_GET['returnUrl']);
+					} else {
+						$this->redirect(array('view','id'=>$model->id));
+					}
+				}
+			} catch (Exception $e) {
+				$model->addError('stsf_id', $e->getMessage());
+			}
+		} elseif(isset($_GET['StsfStatesFlow'])) {
+				$model->attributes = $_GET['StsfStatesFlow'];
+		}
 
-        $this->render('create',array( 'model'=>$model));
-    }
-
-
-    public function actionUpdate($id)
-    {
-        $model = $this->loadModel($id);
-        $model->scenario = $this->scenario;
-
-                $this->performAjaxValidation($model, 'stsf-states-flow-form');
-        
-        if(isset($_POST['StsfStatesFlow']))
-        {
-            $model->attributes = $_POST['StsfStatesFlow'];
+		$this->render('create',array( 'model'=>$model));
+	}
 
 
-            try {
-                if($model->save()) {
-                    if (isset($_GET['returnUrl'])) {
-                        $this->redirect($_GET['returnUrl']);
-                    } else {
-                        $this->redirect(array('view','id'=>$model->stsf_id));
-                    }
-                }
-            } catch (Exception $e) {
-                $model->addError('stsf_id', $e->getMessage());
-            }
-        }
+	public function actionUpdate($id)
+	{
+		$model = $this->loadModel($id);
 
-        $this->render('update',array('model'=>$model,));
-    }
+				$this->performAjaxValidation($model, 'stsf-states-flow-form');
+		
+		if(isset($_POST['StsfStatesFlow']))
+		{
+			$model->attributes = $_POST['StsfStatesFlow'];
 
-    public function actionEditableSaver()
-    {
-        Yii::import('EditableSaver'); //or you can add import 'ext.editable.*' to config
-        $es = new EditableSaver('StsfStatesFlow');  // classname of model to be updated
-        $es->update();
-    }
 
-    public function actionDelete($id)
-    {
-        if(Yii::app()->request->isPostRequest)
-        {
-            try {
-                $this->loadModel($id)->delete();
-            } catch (Exception $e) {
-                throw new CHttpException(500,$e->getMessage());
-            }
+			try {
+    			if($model->save()) {
+					if (isset($_GET['returnUrl'])) {
+						$this->redirect($_GET['returnUrl']);
+					} else {
+						$this->redirect(array('view','id'=>$model->id));
+					}
+        		}
+			} catch (Exception $e) {
+				$model->addError('stsf_id', $e->getMessage());
+			}	
+		}
 
-            if(!isset($_GET['ajax']))
-            {
-                if (isset($_GET['returnUrl'])) {
-                    $this->redirect($_GET['returnUrl']);
-                } else {
-                    $this->redirect(array('admin'));
-                }
-            }
-        }
-        else
-            throw new CHttpException(400,Yii::t('crud', 'Invalid request. Please do not repeat this request again.'));
-    }
+		$this->render('update',array(
+					'model'=>$model,
+					));
+	}
 
-    public function actionIndex()
-    {
-        $dataProvider=new CActiveDataProvider('StsfStatesFlow');
-        $this->render('index',array('dataProvider'=>$dataProvider,));
-    }
+	public function actionDelete($id)
+	{
+		if(Yii::app()->request->isPostRequest)
+		{
+			try {
+				$this->loadModel($id)->delete();
+			} catch (Exception $e) {
+				throw new CHttpException(500,$e->getMessage());
+			}
 
-    public function actionAdmin()
-    {
-        $model=new StsfStatesFlow('search');
-        $model->unsetAttributes();
+			if(!isset($_GET['ajax']))
+			{
+					$this->redirect(array('admin'));
+			}
+		}
+		else
+			throw new CHttpException(400,
+					Yii::t('app', 'Invalid request. Please do not repeat this request again.'));
+	}
 
-        if(isset($_GET['StsfStatesFlow'])) {
-            $model->attributes = $_GET['StsfStatesFlow'];
-        }
+	public function actionIndex()
+	{
+		$dataProvider=new CActiveDataProvider('StsfStatesFlow');
+		$this->render('index',array(
+			'dataProvider'=>$dataProvider,
+		));
+	}
 
-        $this->render('admin',array('model'=>$model,));
-    }
+	public function actionAdmin()
+	{
+		$model=new StsfStatesFlow('search');
+		$model->unsetAttributes();
 
-    public function loadModel($id)
-    {
-        $model=StsfStatesFlow::model()->findByPk($id);
-        if($model===null)
-            throw new CHttpException(404,Yii::t('crud', 'The requested page does not exist.'));
-        return $model;
-    }
+		if(isset($_GET['StsfStatesFlow']))
+			$model->attributes = $_GET['StsfStatesFlow'];
 
-    protected function performAjaxValidation($model)
-    {
-        if(isset($_POST['ajax']) && $_POST['ajax']==='stsf-states-flow-form')
-        {
-            echo CActiveForm::validate($model);
-            Yii::app()->end();
-        }
-    }
+		$this->render('admin',array(
+			'model'=>$model,
+		));
+	}
+
+	public function loadModel($id)
+	{
+		$model=StsfStatesFlow::model()->findByPk($id);
+		if($model===null)
+			throw new CHttpException(404,Yii::t('app', 'The requested page does not exist.'));
+		return $model;
+	}
+
+	protected function performAjaxValidation($model)
+	{
+		if(isset($_POST['ajax']) && $_POST['ajax']==='stsf-states-flow-form')
+		{
+			echo CActiveForm::validate($model);
+			Yii::app()->end();
+		}
+	}
 }

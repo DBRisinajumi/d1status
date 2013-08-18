@@ -10,8 +10,8 @@
  * @property string $stfa_notes
  *
  * Relations of table "stfa_flow_access" available as properties of the model:
- * @property Authitem $stfaAuthitem
  * @property StsfStatesFlow $stfaStsf
+ * @property Authitem $stfaAuthitem
  */
 abstract class BaseStfaFlowAccess extends CActiveRecord{
 	public static function model($className=__CLASS__)
@@ -52,18 +52,18 @@ abstract class BaseStfaFlowAccess extends CActiveRecord{
 	public function relations()
 	{
 		return array(
-			'stfaAuthitem' => array(self::BELONGS_TO, 'Authitem', 'stfa_authitem'),
 			'stfaStsf' => array(self::BELONGS_TO, 'StsfStatesFlow', 'stfa_stsf_id'),
+			'stfaAuthitem' => array(self::BELONGS_TO, 'Authitem', 'stfa_authitem'),
 		);
 	}
 
 	public function attributeLabels()
 	{
 		return array(
-			'stfa_id' => Yii::t('crud', 'Stfa'),
-			'stfa_stsf_id' => Yii::t('crud', 'Stfa Stsf'),
-			'stfa_authitem' => Yii::t('crud', 'Stfa Authitem'),
-			'stfa_notes' => Yii::t('crud', 'Stfa Notes'),
+			'stfa_id' => Yii::t('D1Status.crud', 'Stfa'),
+			'stfa_stsf_id' => Yii::t('D1Status.crud', 'Stfa Stsf'),
+			'stfa_authitem' => Yii::t('D1Status.crud', 'Stfa Authitem'),
+			'stfa_notes' => Yii::t('D1Status.crud', 'Stfa Notes'),
 		);
 	}
 

@@ -1,70 +1,54 @@
 <?php
-$this->breadcrumbs[Yii::t('crud','Stsf States Flows')] = array('admin');
+$this->breadcrumbs['Stsf States Flows'] = array('index');
 $this->breadcrumbs[] = $model->stsf_id;
+
+if(!$this->menu)
+$this->menu=array(
+array('label'=>Yii::t('app', 'Update') , 'url'=>array('update', 'id'=>$model->stsf_id)),
+array('label'=>Yii::t('app', 'Delete') , 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->stsf_id),'confirm'=>'Are you sure you want to delete this item?')),
+array('label'=>Yii::t('app', 'Create') , 'url'=>array('create')),
+array('label'=>Yii::t('app', 'Manage') , 'url'=>array('admin')),
+array('label'=>Yii::t('app', 'List') , 'url'=>array('index')),
+);
 ?>
-<?php $this->widget("TbBreadcrumbs", array("links"=>$this->breadcrumbs)) ?>
-<h1>
-    <?php echo Yii::t('crud','Stsf States Flow')?> <small><?php echo Yii::t('crud','View')?> #<?php echo $model->stsf_id ?></small></h1>
 
+<h1><?php echo Yii::t('app', 'View');?> StsfStatesFlow <?php echo $model->stsf_id; ?></h1>
 
-
-<?php $this->renderPartial("_toolbar", array("model"=>$model)); ?>
-
-<h2>
-    <?php echo Yii::t('crud','Data')?></h2>
-
-<p>
-    <?php
-    $this->widget('TbDetailView', array(
-    'data'=>$model,
-    'attributes'=>array(
-            'stsf_id',
-        array(
-            'name'=>'stsf_stfl_id',
-            'value'=>($model->stsfStfl !== null)?'<span class=label>CBelongsToRelation</span><br/>'.CHtml::link($model->stsfStfl->stfl_name, array('stflFlow/view','stfl_id'=>$model->stsfStfl->stfl_id), array('class'=>'btn')):'n/a',
-            'type'=>'html',
-        ),
-        array(
-            'name'=>'stsf_prev_stst_id',
-            'value'=>($model->stsfPrevStst !== null)?'<span class=label>CBelongsToRelation</span><br/>'.CHtml::link($model->stsfPrevStst->stst_name, array('ststState/view','stst_id'=>$model->stsfPrevStst->stst_id), array('class'=>'btn')):'n/a',
-            'type'=>'html',
-        ),
-        array(
-            'name'=>'stsf_next_stst_id',
-            'value'=>($model->stsfNextStst !== null)?'<span class=label>CBelongsToRelation</span><br/>'.CHtml::link($model->stsfNextStst->stst_name, array('ststState/view','stst_id'=>$model->stsfNextStst->stst_id), array('class'=>'btn')):'n/a',
-            'type'=>'html',
-        ),
-        'stsf_notes',
+<?php $this->widget('zii.widgets.CDetailView', array(
+'data'=>$model,
+'attributes'=>array(
+		'stsf_id',
+		array(
+			'name'=>'stsf_stfl_id',
+			'value'=>($model->stsfStfl !== null)?CHtml::link($model->stsfStfl->stfl_name, array('stflFlow/view','stfl_id'=>$model->stsfStfl->stfl_id)).' '.CHtml::link(Yii::t('app','Update'), array('stflFlow/update','stfl_id'=>$model->stsfStfl->stfl_id), array('class'=>'edit')):'n/a',
+			'type'=>'html',
+		),
+		array(
+			'name'=>'stsf_prev_stst_id',
+			'value'=>($model->stsfPrevStst !== null)?CHtml::link($model->stsfPrevStst->stst_name, array('ststState/view','stst_id'=>$model->stsfPrevStst->stst_id)).' '.CHtml::link(Yii::t('app','Update'), array('ststState/update','stst_id'=>$model->stsfPrevStst->stst_id), array('class'=>'edit')):'n/a',
+			'type'=>'html',
+		),
+		array(
+			'name'=>'stsf_next_stst_id',
+			'value'=>($model->stsfNextStst !== null)?CHtml::link($model->stsfNextStst->stst_name, array('ststState/view','stst_id'=>$model->stsfNextStst->stst_id)).' '.CHtml::link(Yii::t('app','Update'), array('ststState/update','stst_id'=>$model->stsfNextStst->stst_id), array('class'=>'edit')):'n/a',
+			'type'=>'html',
+		),
+		'stsf_notes',
 ),
-        )); ?></p>
+)); ?>
 
 
-<h2>
-    <?php echo Yii::t('crud','Relations')?></h2>
+<h2><?php echo CHtml::link(Yii::t('app','StfaFlowAccesses'), array('stfaFlowAccess/admin'));?></h2>
+<ul>
+				<?php if (is_array($model->stfaFlowAccesses)) foreach($model->stfaFlowAccesses as $foreignobj) { 
 
-<div class='well'>
-    <div class='row'>
-<div class='span3'><?php $this->widget('bootstrap.widgets.TbButtonGroup', array(
-        'type'=>'', // '', 'primary', 'info', 'success', 'warning', 'danger' or 'inverse'
-        'buttons'=>array(
-            array('label'=>'stfaFlowAccesses', 'icon'=>'icon-list-alt', 'url'=> array('stfaFlowAccess/admin')),
-                array('icon'=>'icon-plus', 'url'=>array('stfaFlowAccess/create', 'StfaFlowAccess' => array('stfa_stsf_id'=>$model->{$model->tableSchema->primaryKey}))),
-        ),
-    )); ?></div><div class='span8'>
-<?php
-    echo '<span class=label>CHasManyRelation</span>';
-    if (is_array($model->stfaFlowAccesses)) {
+					echo '<li>';
+					echo CHtml::link($foreignobj->stfa_notes, array('stfaFlowAccess/view','stfa_id'=>$foreignobj->stfa_id));
 
-        echo CHtml::openTag('ul');
-            foreach($model->stfaFlowAccesses as $relatedModel) {
+						echo ' '.CHtml::link(Yii::t('app','Update'), array('stfaFlowAccess/update','stfa_id'=>$foreignobj->stfa_id), array('class'=>'edit'));
 
-                echo '<li>';
-                echo CHtml::link($relatedModel->stfa_notes, array('stfaFlowAccess/view','stfa_id'=>$relatedModel->stfa_id), array('class'=>''));
-
-                echo '</li>';
-            }
-        echo CHtml::closeTag('ul');
-    }
-?></div>
-     </div> <!-- row -->
-</div> <!-- well -->
+				}
+			?></ul><p><?php echo CHtml::link(
+				Yii::t('app','Create'),
+				array('stfaFlowAccess/create', 'StfaFlowAccess' => array('stfa_stsf_id'=>$model->{$model->tableSchema->primaryKey}))
+					);  ?></p>
