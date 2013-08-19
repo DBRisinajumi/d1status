@@ -15,10 +15,7 @@
  * of the guide for details.
  *
  * NOTE, this file must be saved in UTF-8 encoding.
- *
- * @version $Id: $
  */
 return array (
-  'Ccmp Company' => 'Uzņēmums',
-  'Ccmp Companies' => 'Uzņēmumi',
+  'Assign' => '',
 );

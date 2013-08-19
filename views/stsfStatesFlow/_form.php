@@ -1,8 +1,14 @@
-<div class="form">
-    <p class="note">
-        <?php echo Yii::t('app','Fields with');?> <span class="required">*</span> <?php echo Yii::t('app','are required');?>.
+<div class="">
+    <p class="alert">
+        <?php echo Yii::t('D1StatusModule.crud','Fields with <span class="required">*</span> are required.');?> 
     </p>
 
+
+    <?php
+    $this->widget('echosen.EChosen',
+        array('target'=>'select')
+    );
+    ?>
     <?php
     $form=$this->beginWidget('CActiveForm', array(
     'id'=>'stsf-states-flow-form',
@@ -11,19 +17,29 @@
     ));
 
     echo $form->errorSummary($model);
+
     ?>
+ <div class="row">
+     <div class="span8"> <!-- main inputs -->
 
-    <div class="row">
-<?php echo $form->labelEx($model,'stsf_notes'); ?>
+    
+    <div class="row-fluid input-block-level-container">
+        <div class="span12">
+            <?php echo $form->labelEx($model,'stsf_notes'); ?>
 
-<?php echo $form->textArea($model,'stsf_notes',array('rows'=>6, 'cols'=>50)); ?>
-<?php echo $form->error($model,'stsf_notes'); ?>
-<div class='hint'><?php if('hint.StsfStatesFlow.stsf_notes' != $hint = Yii::t('app', 'stsf_notes')) echo $hint; ?></div>
-</div>
+            <?php echo $form->textArea($model,'stsf_notes',array('rows'=>6, 'cols'=>50)); ?>
+            <?php echo $form->error($model,'stsf_notes'); ?>
+            <?php if('help.stsf_notes' != $help = Yii::t('D1StatusModule.crud', 'help.stsf_notes')) { 
+                echo "<span class='help-block'>{$help}</span>";            
+} ?>
+        </div>
+    </div>
 
-<div class="row">
-<label for="stsfStfl"><?php echo Yii::t('app', 'StsfStfl'); ?></label>
-<?php $this->widget(
+    <div class="row-fluid input-block-level-container">
+        <div class="span12">
+        <label for="stsfStfl"><?php echo Yii::t('D1StatusModule.crud', 'StsfStfl'); ?></label>
+                <?php
+                $this->widget(
 					'Relation',
 					array(
 							'model' => $model,
@@ -34,12 +50,16 @@
 							'htmlOptions' => array(
 								'checkAll' => 'all'),
 							)
-						); ?><br />
-</div>
+						)
+              ?>
+        </div>
+    </div>
 
-<div class="row">
-<label for="stsfPrevStst"><?php echo Yii::t('app', 'StsfPrevStst'); ?></label>
-<?php $this->widget(
+    <div class="row-fluid input-block-level-container">
+        <div class="span12">
+        <label for="stsfPrevStst"><?php echo Yii::t('D1StatusModule.crud', 'StsfPrevStst'); ?></label>
+                <?php
+                $this->widget(
 					'Relation',
 					array(
 							'model' => $model,
@@ -50,12 +70,16 @@
 							'htmlOptions' => array(
 								'checkAll' => 'all'),
 							)
-						); ?><br />
-</div>
+						)
+              ?>
+        </div>
+    </div>
 
-<div class="row">
-<label for="stsfNextStst"><?php echo Yii::t('app', 'StsfNextStst'); ?></label>
-<?php $this->widget(
+    <div class="row-fluid input-block-level-container">
+        <div class="span12">
+        <label for="stsfNextStst"><?php echo Yii::t('D1StatusModule.crud', 'StsfNextStst'); ?></label>
+                <?php
+                $this->widget(
 					'Relation',
 					array(
 							'model' => $model,
@@ -66,13 +90,32 @@
 							'htmlOptions' => array(
 								'checkAll' => 'all'),
 							)
-						); ?><br />
+						)
+              ?>
+        </div>
+    </div>
+
+    </div> <!-- main inputs -->
+
+
+    <div class="span4"> <!-- sub inputs -->
+
+    </div> <!-- sub inputs -->
 </div>
 
 
+    <div class="form-actions">
+        
     <?php
-echo CHtml::Button(Yii::t('app', 'Cancel'), array(
-			'submit' => array('stsfstatesflow/admin')));
-echo CHtml::submitButton(Yii::t('app', 'Save'));
-$this->endWidget(); ?>
+        echo CHtml::Button(Yii::t('D1StatusModule.crud', 'Cancel'), array(
+			'submit' => (isset($_GET['returnUrl']))?$_GET['returnUrl']:array('stsfstatesflow/admin'),
+			'class' => 'btn'
+			));
+        echo ' '.CHtml::submitButton(Yii::t('D1StatusModule.crud', 'Save'), array(
+            'class' => 'btn btn-primary'
+            ));
+    ?>
+</div>
+
+<?php $this->endWidget() ?>
 </div> <!-- form -->

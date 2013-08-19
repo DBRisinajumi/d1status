@@ -1,15 +1,12 @@
 <?php
-$this->breadcrumbs['Stlg Logs'] = array('admin');
-$this->breadcrumbs[] = Yii::t('app', 'Create');
-
-if(!isset($this->menu) || $this->menu === array())
-$this->menu=array(
-/*array('label'=>Yii::t('app', 'List'), 'url'=>array('index')),
-array('label'=>Yii::t('app', 'Manage'), 'url'=>array('admin')),*/
-);
+$this->breadcrumbs[Yii::t('D1StatusModule.crud','Stlg Logs')] = array('admin');
+$this->breadcrumbs[] = Yii::t('D1StatusModule.crud', 'Create');
 ?>
+<?php $this->widget("TbBreadcrumbs", array("links"=>$this->breadcrumbs)) ?>
+<h1>
+    <?php echo Yii::t('D1StatusModule.crud','Stlg Log')?> <small><?php echo Yii::t('D1StatusModule.crud','Create')?></h1>
 
-<h2> Create StlgLog </h2>
+<?php $this->renderPartial("_toolbar", array("model"=>$model)); ?>
 <?php
 $this->renderPartial('_form', array(
 'model' => $model,

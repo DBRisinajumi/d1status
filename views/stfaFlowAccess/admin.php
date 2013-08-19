@@ -1,6 +1,6 @@
 <?php
-$this->breadcrumbs['Stfa Flow Accesses'] = array('admin');
-$this->breadcrumbs[] = Yii::t('app', 'Admin');
+$this->breadcrumbs[] = Yii::t('D1StatusModule.crud','Stfa Flow Accesses');
+
 
 Yii::app()->clientScript->registerScript('search', "
 $('.search-button').click(function(){
@@ -15,26 +15,23 @@ return false;
 });
 ");
 ?>
-<h1> <?php echo Yii::t('app', 'Manage'); ?> <?php echo Yii::t('app', 'Stfa Flow Accesses'); ?> </h1>
 
+<?php $this->widget("TbBreadcrumbs", array("links"=>$this->breadcrumbs)) ?>
+<h1>
+    <?php echo Yii::t('D1StatusModule.crud', 'Stfa Flow Accesses'); ?> <small><?php echo Yii::t('D1StatusModule.crud', 'Manage'); ?></small>
+</h1>
 
-<ul><li>BelongsTo <?php echo CHtml::link('StsfStatesFlow', array('stsfStatesFlow/admin')); ?> </li><li>BelongsTo <?php echo CHtml::link('Authitem', array('authitem/admin')); ?> </li></ul>
-
-<?php echo CHtml::link(Yii::t('app', 'Advanced Search'),'#',array('class'=>'search-button')); ?><div class="search-form" style="display:none">
-    <?php $this->renderPartial('_search',array(
-	'model'=>$model,
-)); ?>
-</div>
-<?php
-$locale = CLocale::getInstance(Yii::app()->language);
-
- $this->widget('zii.widgets.grid.CGridView', array(
-'id'=>'stfa-flow-access-grid',
-'dataProvider'=>$model->search(),
-'filter'=>$model,
-'columns'=>array(
-
-
+<?php $this->renderPartial("_toolbar", array("model"=>$model)); ?>
+<?php $this->widget('TbGridView',
+    array(
+        'id'=>'stfa-flow-access-grid',
+        'dataProvider'=>$model->search(),
+        'filter'=>$model,
+        'pager' => array(
+        'class' => 'TbPager',
+        'displayFirstAndLast' => true,
+    ),
+    'columns'=>array(
 		'stfa_id',
 		array(
 					'name'=>'stfa_stsf_id',
@@ -47,15 +44,11 @@ $locale = CLocale::getInstance(Yii::app()->language);
 							'filter'=>CHtml::listData(Authitem::model()->findAll(), 'name', 'type'),
 							),
 #		'stfa_notes',
-array(
-'class'=>'CButtonColumn',
-'viewButtonUrl' => "Yii::app()->controller->createUrl('view', array('stfa_id' => \$data->stfa_id))",
-'updateButtonUrl' => "Yii::app()->controller->createUrl('update', array('stfa_id' => \$data->stfa_id))",
-'deleteButtonUrl' => "Yii::app()->controller->createUrl('delete', array('stfa_id' => \$data->stfa_id))",
-
-),
-),
+        array(
+            'class'=>'TbButtonColumn',
+            'viewButtonUrl' => "Yii::app()->controller->createUrl('view', array('stfa_id' => \$data->stfa_id))",
+            'updateButtonUrl' => "Yii::app()->controller->createUrl('update', array('stfa_id' => \$data->stfa_id))",
+            'deleteButtonUrl' => "Yii::app()->controller->createUrl('delete', array('stfa_id' => \$data->stfa_id))",
+        ),
+    ),
 )); ?>
-
-
-<?php echo CHtml::link('Create new StfaFlowAccess', array('create')); ?>

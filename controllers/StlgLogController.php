@@ -2,174 +2,171 @@
 
 class StlgLogController extends Controller
 {
-	public $layout='//layouts/column2';
+    #public $layout='//layouts/column2';
+    public $defaultAction = "admin";
+    public $scenario = "crud";
 
-	public function filters()
-	{
-		return array(
-			'accessControl', 
-		);
-	}	
+    public function filters() {
+	return array(
+			'accessControl',
+			);
+}
 
-	public function accessRules()
-	{
-		return array(
-			array('allow',  
-				'actions'=>array('index','view'),
+public function accessRules() {
+	return array(
+			array('allow',
+				'actions'=>array('create','editableSaver','update','delete','admin','view'),
+				'roles'=>array('D1Status.StlgLog.*'),
+				),
+			array('deny',
 				'users'=>array('*'),
-			),
-			array('allow', 
-				'actions'=>array('create','update'),
-				'users'=>array('@'),
-			),
-			array('allow', 
-				'actions'=>array('admin','delete'),
-				'users'=>array('admin'),
-			),
-			array('deny',  
-				'users'=>array('*'),
-			),
-		);
-	}
-	
-	public function beforeAction($action){
-		parent::beforeAction($action);
-		// map identifcationColumn to id
-		if (!isset($_GET['id']) && isset($_GET['stlg_id'])) {
-			$model=StlgLog::model()->find('stlg_id = :stlg_id', array(
-			':stlg_id' => $_GET['stlg_id']));
-			if ($model !== null) {
-				$_GET['id'] = $model->stlg_id;
-			} else {
-				throw new CHttpException(400);
-			}
-		}
-		if ($this->module !== null) {
-			$this->breadcrumbs[$this->module->Id] = array('/'.$this->module->Id);
-		}
-		return true;
-	}
-	
-	public function actionView($id)
-	{
-		$model = $this->loadModel($id);
-		$this->render('view',array(
-			'model' => $model,
-		));
-	}
+				),
+			);
+}
 
-	public function actionCreate()
-	{
-		$model = new StlgLog;
+    public function beforeAction($action){
+        parent::beforeAction($action);
+        // map identifcationColumn to id
+        if (!isset($_GET['id']) && isset($_GET['stlg_id'])) {
+            $model=StlgLog::model()->find('stlg_id = :stlg_id', array(
+            ':stlg_id' => $_GET['stlg_id']));
+            if ($model !== null) {
+                $_GET['id'] = $model->stlg_id;
+            } else {
+                throw new CHttpException(400);
+            }
+        }
+        if ($this->module !== null) {
+            $this->breadcrumbs[$this->module->Id] = array('/'.$this->module->Id);
+        }
+        return true;
+    }
 
-				$this->performAjaxValidation($model, 'stlg-log-form');
+    public function actionView($id)
+    {
+        $model = $this->loadModel($id);
+        $this->render('view',array('model' => $model,));
+    }
+
+    public function actionCreate()
+    {
+        $model = new StlgLog;
+        $model->scenario = $this->scenario;
+
+                $this->performAjaxValidation($model, 'stlg-log-form');
     
-		if(isset($_POST['StlgLog'])) {
-			$model->attributes = $_POST['StlgLog'];
+        if(isset($_POST['StlgLog'])) {
+            $model->attributes = $_POST['StlgLog'];
 
-			try {
-    			if($model->save()) {
-					if (isset($_GET['returnUrl'])) {
-						$this->redirect($_GET['returnUrl']);
-					} else {
-						$this->redirect(array('view','id'=>$model->id));
-					}
-				}
-			} catch (Exception $e) {
-				$model->addError('stlg_id', $e->getMessage());
-			}
-		} elseif(isset($_GET['StlgLog'])) {
-				$model->attributes = $_GET['StlgLog'];
-		}
+            try {
+                if($model->save()) {
+                    if (isset($_GET['returnUrl'])) {
+                        $this->redirect($_GET['returnUrl']);
+                    } else {
+                        $this->redirect(array('view','id'=>$model->stlg_id));
+                    }
+                }
+            } catch (Exception $e) {
+                $model->addError('stlg_id', $e->getMessage());
+            }
+        } elseif(isset($_GET['StlgLog'])) {
+            $model->attributes = $_GET['StlgLog'];
+        }
 
-		$this->render('create',array( 'model'=>$model));
-	}
-
-
-	public function actionUpdate($id)
-	{
-		$model = $this->loadModel($id);
-
-				$this->performAjaxValidation($model, 'stlg-log-form');
-		
-		if(isset($_POST['StlgLog']))
-		{
-			$model->attributes = $_POST['StlgLog'];
+        $this->render('create',array( 'model'=>$model));
+    }
 
 
-			try {
-    			if($model->save()) {
-					if (isset($_GET['returnUrl'])) {
-						$this->redirect($_GET['returnUrl']);
-					} else {
-						$this->redirect(array('view','id'=>$model->id));
-					}
-        		}
-			} catch (Exception $e) {
-				$model->addError('stlg_id', $e->getMessage());
-			}	
-		}
+    public function actionUpdate($id)
+    {
+        $model = $this->loadModel($id);
+        $model->scenario = $this->scenario;
 
-		$this->render('update',array(
-					'model'=>$model,
-					));
-	}
+                $this->performAjaxValidation($model, 'stlg-log-form');
+        
+        if(isset($_POST['StlgLog']))
+        {
+            $model->attributes = $_POST['StlgLog'];
 
-	public function actionDelete($id)
-	{
-		if(Yii::app()->request->isPostRequest)
-		{
-			try {
-				$this->loadModel($id)->delete();
-			} catch (Exception $e) {
-				throw new CHttpException(500,$e->getMessage());
-			}
 
-			if(!isset($_GET['ajax']))
-			{
-					$this->redirect(array('admin'));
-			}
-		}
-		else
-			throw new CHttpException(400,
-					Yii::t('app', 'Invalid request. Please do not repeat this request again.'));
-	}
+            try {
+                if($model->save()) {
+                    if (isset($_GET['returnUrl'])) {
+                        $this->redirect($_GET['returnUrl']);
+                    } else {
+                        $this->redirect(array('view','id'=>$model->stlg_id));
+                    }
+                }
+            } catch (Exception $e) {
+                $model->addError('stlg_id', $e->getMessage());
+            }
+        }
 
-	public function actionIndex()
-	{
-		$dataProvider=new CActiveDataProvider('StlgLog');
-		$this->render('index',array(
-			'dataProvider'=>$dataProvider,
-		));
-	}
+        $this->render('update',array('model'=>$model,));
+    }
 
-	public function actionAdmin()
-	{
-		$model=new StlgLog('search');
-		$model->unsetAttributes();
+    public function actionEditableSaver()
+    {
+        Yii::import('EditableSaver'); //or you can add import 'ext.editable.*' to config
+        $es = new EditableSaver('StlgLog');  // classname of model to be updated
+        $es->update();
+    }
 
-		if(isset($_GET['StlgLog']))
-			$model->attributes = $_GET['StlgLog'];
+    public function actionDelete($id)
+    {
+        if(Yii::app()->request->isPostRequest)
+        {
+            try {
+                $this->loadModel($id)->delete();
+            } catch (Exception $e) {
+                throw new CHttpException(500,$e->getMessage());
+            }
 
-		$this->render('admin',array(
-			'model'=>$model,
-		));
-	}
+            if(!isset($_GET['ajax']))
+            {
+                if (isset($_GET['returnUrl'])) {
+                    $this->redirect($_GET['returnUrl']);
+                } else {
+                    $this->redirect(array('admin'));
+                }
+            }
+        }
+        else
+            throw new CHttpException(400,Yii::t('D1StatusModule.crud', 'Invalid request. Please do not repeat this request again.'));
+    }
 
-	public function loadModel($id)
-	{
-		$model=StlgLog::model()->findByPk($id);
-		if($model===null)
-			throw new CHttpException(404,Yii::t('app', 'The requested page does not exist.'));
-		return $model;
-	}
+    public function actionIndex()
+    {
+        $dataProvider=new CActiveDataProvider('StlgLog');
+        $this->render('index',array('dataProvider'=>$dataProvider,));
+    }
 
-	protected function performAjaxValidation($model)
-	{
-		if(isset($_POST['ajax']) && $_POST['ajax']==='stlg-log-form')
-		{
-			echo CActiveForm::validate($model);
-			Yii::app()->end();
-		}
-	}
+    public function actionAdmin()
+    {
+        $model=new StlgLog('search');
+        $model->unsetAttributes();
+
+        if(isset($_GET['StlgLog'])) {
+            $model->attributes = $_GET['StlgLog'];
+        }
+
+        $this->render('admin',array('model'=>$model,));
+    }
+
+    public function loadModel($id)
+    {
+        $model=StlgLog::model()->findByPk($id);
+        if($model===null)
+            throw new CHttpException(404,Yii::t('D1StatusModule.crud', 'The requested page does not exist.'));
+        return $model;
+    }
+
+    protected function performAjaxValidation($model)
+    {
+        if(isset($_POST['ajax']) && $_POST['ajax']==='stlg-log-form')
+        {
+            echo CActiveForm::validate($model);
+            Yii::app()->end();
+        }
+    }
 }
