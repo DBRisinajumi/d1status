@@ -61,10 +61,10 @@ abstract class BaseStstState extends CActiveRecord{
 	public function attributeLabels()
 	{
 		return array(
-			'stst_id' => Yii::t('D1Status.crud', 'Stst'),
-			'stst_name' => Yii::t('D1Status.crud', 'Stst Name'),
-			'stst_code' => Yii::t('D1Status.crud', 'Stst Code'),
-			'stst_icon' => Yii::t('D1Status.crud', 'Stst Icon'),
+			'stst_id' => Yii::t('D1StatusModule.crud', 'Stst'),
+			'stst_name' => Yii::t('D1StatusModule.crud', 'Stst Name'),
+			'stst_code' => Yii::t('D1StatusModule.crud', 'Stst Code'),
+			'stst_icon' => Yii::t('D1StatusModule.crud', 'Stst Icon'),
 		);
 	}
 

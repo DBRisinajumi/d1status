@@ -62,12 +62,12 @@ abstract class BaseStlgLog extends CActiveRecord{
 	public function attributeLabels()
 	{
 		return array(
-			'stlg_id' => Yii::t('D1Status.crud', 'Stlg'),
-			'stlg_stfl_id' => Yii::t('D1Status.crud', 'Stlg Stfl'),
-			'stlg_record_id' => Yii::t('D1Status.crud', 'Stlg Record'),
-			'stlg_user_id' => Yii::t('D1Status.crud', 'Stlg User'),
-			'stlg_stst_id' => Yii::t('D1Status.crud', 'Stlg Stst'),
-			'stlg_datetime' => Yii::t('D1Status.crud', 'Stlg Datetime'),
+			'stlg_id' => Yii::t('D1StatusModule.crud', 'Stlg'),
+			'stlg_stfl_id' => Yii::t('D1StatusModule.crud', 'Stlg Stfl'),
+			'stlg_record_id' => Yii::t('D1StatusModule.crud', 'Stlg Record'),
+			'stlg_user_id' => Yii::t('D1StatusModule.crud', 'Stlg User'),
+			'stlg_stst_id' => Yii::t('D1StatusModule.crud', 'Stlg Stst'),
+			'stlg_datetime' => Yii::t('D1StatusModule.crud', 'Stlg Datetime'),
 		);
 	}
 

@@ -60,10 +60,10 @@ abstract class BaseStfaFlowAccess extends CActiveRecord{
 	public function attributeLabels()
 	{
 		return array(
-			'stfa_id' => Yii::t('D1Status.crud', 'Stfa'),
-			'stfa_stsf_id' => Yii::t('D1Status.crud', 'Stfa Stsf'),
-			'stfa_authitem' => Yii::t('D1Status.crud', 'Stfa Authitem'),
-			'stfa_notes' => Yii::t('D1Status.crud', 'Stfa Notes'),
+			'stfa_id' => Yii::t('D1StatusModule.crud', 'Stfa'),
+			'stfa_stsf_id' => Yii::t('D1StatusModule.crud', 'Stfa Stsf'),
+			'stfa_authitem' => Yii::t('D1StatusModule.crud', 'Stfa Authitem'),
+			'stfa_notes' => Yii::t('D1StatusModule.crud', 'Stfa Notes'),
 		);
 	}
 
