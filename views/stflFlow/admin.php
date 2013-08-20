@@ -32,11 +32,10 @@ return false;
         'displayFirstAndLast' => true,
     ),
     'columns'=>array(
-		'stfl_id',
 		'stfl_name',
 		'stfl_table',
 		'stfl_field',
-#		'stfl_notes',
+		'stfl_notes',
         array(
             'class'=>'TbButtonColumn',
             'viewButtonUrl' => "Yii::app()->controller->createUrl('view', array('stfl_id' => \$data->stfl_id))",

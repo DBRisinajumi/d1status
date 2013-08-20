@@ -12,6 +12,7 @@ class D1StatusModule extends CWebModule
 			'D1Status.models.*',
 			'D1Status.components.*',
 		));
+        $this->defaultController = 'StflFlow';
 	}
 
 	public function beforeControllerAction($controller, $action)
