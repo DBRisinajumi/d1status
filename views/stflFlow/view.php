@@ -1,6 +1,6 @@
 <?php
 $this->breadcrumbs[Yii::t('D1StatusModule.crud','Stfl Flows')] = array('admin');
-$this->breadcrumbs[] = $model->stfl_id;
+$this->breadcrumbs[] = $model->stfl_name;
 ?>
 <?php $this->widget("TbBreadcrumbs", array("links"=>$this->breadcrumbs)) ?>
 <h1>

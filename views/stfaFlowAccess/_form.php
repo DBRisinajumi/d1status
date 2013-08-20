@@ -22,19 +22,6 @@
  <div class="row">
      <div class="span8"> <!-- main inputs -->
 
-    
-    <div class="row-fluid input-block-level-container">
-        <div class="span12">
-            <?php echo $form->labelEx($model,'stfa_notes'); ?>
-
-            <?php echo $form->textArea($model,'stfa_notes',array('rows'=>6, 'cols'=>50)); ?>
-            <?php echo $form->error($model,'stfa_notes'); ?>
-            <?php if('help.stfa_notes' != $help = Yii::t('D1StatusModule.crud', 'help.stfa_notes')) { 
-                echo "<span class='help-block'>{$help}</span>";            
-} ?>
-        </div>
-    </div>
-
     <div class="row-fluid input-block-level-container">
         <div class="span12">
         <label for="stfaStsf"><?php echo Yii::t('D1StatusModule.crud', 'StfaStsf'); ?></label>
@@ -44,7 +31,7 @@
 					array(
 							'model' => $model,
 							'relation' => 'stfaStsf',
-							'fields' => 'stsf_notes',
+							'fields' => array('stsfPrevStst.stst_name','stsfNextStst.stst_name','stsf_notes'),
 							'allowEmpty' => false,
 							'style' => 'dropdownlist',
 							'htmlOptions' => array(
@@ -64,7 +51,7 @@
 					array(
 							'model' => $model,
 							'relation' => 'stfaAuthitem',
-							'fields' => 'type',
+							'fields' => 'name',
 							'allowEmpty' => false,
 							'style' => 'dropdownlist',
 							'htmlOptions' => array(
@@ -74,7 +61,19 @@
               ?>
         </div>
     </div>
+         
+    <div class="row-fluid input-block-level-container">
+        <div class="span12">
+            <?php echo $form->labelEx($model,'stfa_notes'); ?>
 
+            <?php echo $form->textArea($model,'stfa_notes',array('rows'=>6, 'cols'=>50)); ?>
+            <?php echo $form->error($model,'stfa_notes'); ?>
+            <?php if('help.stfa_notes' != $help = Yii::t('D1StatusModule.crud', 'help.stfa_notes')) { 
+                echo "<span class='help-block'>{$help}</span>";            
+} ?>
+        </div>
+    </div>
+         
     </div> <!-- main inputs -->
 
 
