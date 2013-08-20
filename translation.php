@@ -1,7 +1,7 @@
 <?php
-//yiic message ../vendor/dbrisinajumi/d1status/translation.php
+
 return array(
-    'sourcePath' => dirname(__FILE__) . DIRECTORY_SEPARATOR ,  //root dir of all source
+    'sourcePath' => dirname(__FILE__) . DIRECTORY_SEPARATOR . '..',  //root dir of all source
     'messagePath' => dirname(__FILE__) . DIRECTORY_SEPARATOR .'messages',  //root dir of message translations
     'languages'  => array('lv','en','ru'),  //array of lang codes to translate to, e.g. es_mx
     'fileTypes' => array('php',), //array of extensions no dot all others excluded
