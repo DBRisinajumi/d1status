@@ -32,7 +32,7 @@ return false;
         'displayFirstAndLast' => true,
     ),
     'columns'=>array(
-		'stsf_id',
+		//'stsf_id',
 		array(
 					'name'=>'stsf_stfl_id',
 					'value'=>'CHtml::value($data,\'stsfStfl.stfl_name\')',

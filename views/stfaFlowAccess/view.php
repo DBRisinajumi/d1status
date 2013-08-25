@@ -4,7 +4,7 @@ $this->breadcrumbs[] = $model->stfa_id;
 ?>
 <?php $this->widget("TbBreadcrumbs", array("links"=>$this->breadcrumbs)) ?>
 <h1>
-    <?php echo Yii::t('D1StatusModule.crud','Stfa Flow Access')?> <small><?php echo Yii::t('D1StatusModule.crud','View')?> #<?php echo $model->stfa_id ?></small></h1>
+    <?php echo Yii::t('D1StatusModule.crud','Stfa Flow Access')?> <small><?php echo Yii::t('D1StatusModule.crud','View')?> #<?php echo $model->stfa_authitem ?></small></h1>
 
 
 

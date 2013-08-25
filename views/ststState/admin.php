@@ -32,7 +32,7 @@ return false;
         'displayFirstAndLast' => true,
     ),
     'columns'=>array(
-		'stst_id',
+		//'stst_id',
 		'stst_name',
 		'stst_code',
 		'stst_icon',

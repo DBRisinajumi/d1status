@@ -4,7 +4,7 @@ $this->breadcrumbs[] = $model->stlg_id;
 ?>
 <?php $this->widget("TbBreadcrumbs", array("links"=>$this->breadcrumbs)) ?>
 <h1>
-    <?php echo Yii::t('D1StatusModule.crud','Stlg Log')?> <small><?php echo Yii::t('D1StatusModule.crud','View')?> #<?php echo $model->stlg_id ?></small></h1>
+    <?php echo Yii::t('D1StatusModule.crud','Stlg Log')?> <small><?php echo Yii::t('D1StatusModule.crud','View')?> #<?php echo $model->stlg_id ?> <?php echo $model->stlg_datetime ?> </small></h1>
 
 
 
