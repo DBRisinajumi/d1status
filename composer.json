@@ -16,6 +16,6 @@
      ],
      "require": {
         "php": ">=5.3.0",
-        "sammaye/auditrail2": "dev-master"
+        "sammaye/audittrail": "dev-master"
      }
 }
