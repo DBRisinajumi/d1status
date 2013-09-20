@@ -16,7 +16,7 @@ public function accessRules() {
 	return array(
 			array('allow',
 				'actions'=>array('create','editableSaver','update','delete','admin','view'),
-				'roles'=>array('D1Status.StfaFlowAccess.*'),
+				'roles'=>array('admin'),
 				),
 			array('deny',
 				'users'=>array('*'),
