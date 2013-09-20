@@ -44,7 +44,7 @@ abstract class BaseStflFlow extends CActiveRecord{
 		return array_merge(
 		    parent::behaviors(), array(
 			'savedRelated' => array(
-				'class' => 'gii-template-collection.components.CSaveRelationsBehavior'
+				'class' => 'vendor.schmunk42.relation.behaviors.GtcSaveRelationsBehavior'
 			)
 		    )
 		);

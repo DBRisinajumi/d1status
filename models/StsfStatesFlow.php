@@ -28,7 +28,7 @@ class StsfStatesFlow extends BaseStsfStatesFlow
                 parent::behaviors(),
                 array(
                     'LoggableBehavior'=>array(
-                        'class' => 'vendor.sammaye.auditrail2.behaviors.LoggableBehavior'
+                        'class' => 'vendor.sammaye.audittrail.behaviors.LoggableBehavior'
                     )
             ));
 	}
