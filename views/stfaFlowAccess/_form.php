@@ -27,7 +27,7 @@
         <label for="stfaStsf"><?php echo Yii::t('D1StatusModule.crud', 'StfaStsf'); ?></label>
                 <?php
                 $this->widget(
-					'Relation',
+					'vendor.schmunk42.relation.widgets.GtcRelation',
 					array(
 							'model' => $model,
 							'relation' => 'stfaStsf',
@@ -47,7 +47,7 @@
         <label for="stfaAuthitem"><?php echo Yii::t('D1StatusModule.crud', 'StfaAuthitem'); ?></label>
                 <?php
                 $this->widget(
-					'Relation',
+					'vendor.schmunk42.relation.widgets.GtcRelation',
 					array(
 							'model' => $model,
 							'relation' => 'stfaAuthitem',

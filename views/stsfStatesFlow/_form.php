@@ -40,7 +40,7 @@
         <label for="stsfStfl"><?php echo Yii::t('D1StatusModule.crud', 'StsfStfl'); ?></label>
                 <?php
                 $this->widget(
-					'Relation',
+					'vendor.schmunk42.relation.widgets.GtcRelation',
 					array(
 							'model' => $model,
 							'relation' => 'stsfStfl',
@@ -60,7 +60,7 @@
         <label for="stsfPrevStst"><?php echo Yii::t('D1StatusModule.crud', 'StsfPrevStst'); ?></label>
                 <?php
                 $this->widget(
-					'Relation',
+					'vendor.schmunk42.relation.widgets.GtcRelation',
 					array(
 							'model' => $model,
 							'relation' => 'stsfPrevStst',
@@ -80,7 +80,7 @@
         <label for="stsfNextStst"><?php echo Yii::t('D1StatusModule.crud', 'StsfNextStst'); ?></label>
                 <?php
                 $this->widget(
-					'Relation',
+					'vendor.schmunk42.relation.widgets.GtcRelation',
 					array(
 							'model' => $model,
 							'relation' => 'stsfNextStst',
