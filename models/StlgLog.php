@@ -28,7 +28,7 @@ class StlgLog extends BaseStlgLog
                 parent::behaviors(),
                 array(
                     'LoggableBehavior'=>array(
-                        'class' => 'vendor.sammaye.audittrail.behaviors.LoggableBehavior'
+                        'class' => 'vendor.sammaye.auditrail2.behaviors.LoggableBehavior'
                     )
             ));
 	}
