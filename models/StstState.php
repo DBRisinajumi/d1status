@@ -22,6 +22,11 @@ class StstState extends BaseStstState
 
 	}
 
+    public function getitemLabel() {
+		return (string) $this->stst_name;
+
+	}
+
 	public function behaviors()
 	{
             return array_merge(
