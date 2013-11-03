@@ -44,5 +44,26 @@ class StflFlow extends BaseStflFlow
 		    )*/
 		);
 	}
+    
+    public function listData($table, $field, $stst_id) {
+        $sql = "
+            SELECT 
+              stst_id,
+              stst_code,
+              stfa_authitem
+            FROM
+              stfl_flow 
+              INNER JOIN stsf_states_flow 
+                ON stfl_id = stsf_stfl_id 
+              INNER JOIN stst_state 
+                ON stsf_next_stst_id = stst_id 
+              INNER JOIN stfa_flow_access 
+                ON stsf_id = stfa_stsf_id                 
+            WHERE stfl_table = '" . $table . "' 
+              AND stfl_field = '" . $field . "' 
+              AND stsf_prev_stst_id = " . $stst_id . "             
+            ";
+        return Yii::app()->db->createCommand($sql)->queryAll();
+    }
 
 }
