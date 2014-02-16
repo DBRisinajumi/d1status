@@ -52,7 +52,7 @@
         <label for="stlgStfl"><?php echo Yii::t('D1StatusModule.crud', 'StlgStfl'); ?></label>
                 <?php
                 $this->widget(
-					'Relation',
+					'\GtcRelation',
 					array(
 							'model' => $model,
 							'relation' => 'stlgStfl',
@@ -72,7 +72,7 @@
         <label for="stlgStst"><?php echo Yii::t('D1StatusModule.crud', 'StlgStst'); ?></label>
                 <?php
                 $this->widget(
-					'Relation',
+					'\GtcRelation',
 					array(
 							'model' => $model,
 							'relation' => 'stlgStst',
@@ -92,7 +92,7 @@
         <label for="stlgUser"><?php echo Yii::t('D1StatusModule.crud', 'StlgUser'); ?></label>
                 <?php
                 $this->widget(
-					'Relation',
+					'\GtcRelation',
 					array(
 							'model' => $model,
 							'relation' => 'stlgUser',
